@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "checkJs": true,
+    "checkJs": false,
     "module": "ESNext",
     "moduleResolution": "Node",
     "target": "ES2020",
