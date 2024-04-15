@@ -2,12 +2,11 @@ const discord = require("discord.js");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
 const MODEL = "gemini-pro";
-const API_KEY =
-  process.env.API_KEY || "AIzaSyDOIKD78HWJrgbJZnnc1lOanvhZwO-92xk";
-const BOT_TOKEN =
-  process.env.BOT_TOKEN ||
-  "MTIxNTM4NTU5Mzk3OTIxNTkyNA.G_2c45.xQI5A5iOU1NQ84PvL0zhW8_k5W_s4sPo5IMaik";
-const CHANNEL_ID = process.env.CHANNEL_ID || "1215352108501696564";
+
+// API keys 
+const GEMINI_API = process.env.GEMINI_API;
+const DISCORD_API = process.env.DISCORD_API;
+const CHANNEL_ID = process.env.CHANNEL_ID;
 
 const {
   Client,
@@ -105,8 +104,8 @@ We are committed to pushing the boundaries of technology by creating an innovati
 
       message.author.send({
         content: `Vue.js-Nuxt | profík
-Type: Part-time
-Company: Quanti
+        Type: Part-time
+        Company: Quanti
 Jsi zručný frontenďák, který se nebojí nových projektů a výzev? Pokud ano, staň se jedním z nás! Hledáme Vue.js-Nuxt developera do týmu pro projekt na zelené louce. Jedná se o relativně velký e-shop pro nadnárodní společnost, který poběží na headless backendu Adobe Commerce (Magento). O projektu PWA frontend plánujeme psát v Nuxt 3 s TypeScriptem, lokálně budeme používat Vite místo Webpacku a stylovat budeme v Sassu (s Bootstrapem). Backend, který poběží lokálně v Dockeru, bude pak frontendu vystavovat GraphQL API.`,
         components: [row3],
       });
@@ -122,4 +121,4 @@ Jsi zručný frontenďák, který se nebojí nových projektů a výzev? Pokud a
   }
 });
 
-client.login(BOT_TOKEN);
+client.login(DISCORD_API);
