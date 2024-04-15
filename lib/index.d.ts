@@ -36,4 +36,4 @@ declare function getOpportunitiesFromKeywords(keywords: string[]): Promise<Oppor
 
 declare function extractKeywordsFromText(text: string): Promise<string[]>;
 
-declare function listenToDiscordBot(bot: Client): void;
+declare function listenToDiscordBot(): void;
