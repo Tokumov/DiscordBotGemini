@@ -1,23 +1,26 @@
-const discord = require("discord.js");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-require("dotenv").config();
+import {
+  Client,
+  GatewayIntentBits,
+  Partials,
+  ButtonBuilder,
+  ActionRowBuilder,
+  ButtonStyle,
+} from "discord.js";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { config } from "dotenv";
+
+import { listenToDiscordBot } from "./lib/index.js";
+
+config();
+
+listenToDiscordBot(); // doing nothing now
+
 const MODEL = "gemini-pro";
 
 // API keys 
 const GEMINI_API = process.env.GEMINI_API;
 const DISCORD_API = process.env.DISCORD_API;
 const CHANNEL_ID = process.env.CHANNEL_ID;
-
-const {
-  Client,
-  GatewayIntentBits,
-  Partials,
-  ChannelType,
-  ButtonBuilder,
-  ActionRowBuilder,
-  ButtonStyle,
-} = require("discord.js");
-require("dotenv").config();
 
 // Use environment variables for sensitive data
 
