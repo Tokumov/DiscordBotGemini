@@ -1,0 +1,49 @@
+@startuml Deployment Diagram
+
+folder BotArchitecture as "Bot Architecture" {
+    actor user
+    
+    node DiscordApp as "Discord Application"
+    
+    node NodeJSServer as "NodeJS Server" {
+      cloud DiscordBot as "Discord Bot"
+    }
+    
+    node ExpertsAI {
+      cloud ExpertsAIServer as "ExpertsAI Server"
+      cloud RecommendationSystem as "Recommendation System"
+      database OpportunitiesDB as "Opportunities DB"
+    }
+    
+    cloud ChatGPTAPI as "ChatGPT API"
+    
+    queue ws as "WebSocket"
+    queue http1 as "HTTP"
+    queue http2 as "HTTP"
+
+    user --> DiscordApp :Sending CV
+    user <-- DiscordApp :Matched Opportunities
+    
+    
+    DiscordApp -[#blue]-> ws :Incoming message
+    ws -[#blue]-> DiscordBot 
+    
+    DiscordApp <-[#orange]- ws :Outgoing message
+    ws <-[#orange]- DiscordBot 
+    
+    
+    DiscordBot -[#yellow]-> http1 :Raw User data
+    DiscordBot <-[#red]- http1 :User keywords
+    
+    http1 -[#yellow]-> ChatGPTAPI
+    http1 <-[#red]- ChatGPTAPI
+    
+    DiscordBot -[#red]-> http2 :Opportinities keywords
+    DiscordBot <-[#green]- http2 :Recommended Opportinities
+    
+    http2 -[#red]-> ExpertsAIServer
+    http2 <-[#green]- ExpertsAIServer
+}
+
+
+@enduml 
