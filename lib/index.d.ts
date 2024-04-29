@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { OpenAI } from "openai";
 
 export interface Opportunity {
     opportunityId: string
@@ -32,8 +32,10 @@ export interface OrganizationBaseDto {
 
 declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<Opportunity[]>;
 
-declare function getOpportunitiesFromKeywords(keywords: string[], limit : number): Promise<Opportunity[]>;
+declare function getOpportunitiesFromKeywords(keywords: string[], limit: number): Promise<Opportunity[]>;
 
-declare function extractKeywordsFromText(text: string): Promise<string[]>;
+declare function getOpportunitiesFromKeywords(text: string): Promise<string[]>;
+
+declare function initOpenAI(): void;
 
 declare function listenToDiscordBot(): void;
