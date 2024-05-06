@@ -1,0 +1,23 @@
+@startuml
+actor User as user
+participant "Discord Bot" as bot
+participant "GPTs/Llama" as ai
+participant "experts.ai" as experts
+actor HR as hr
+
+== Job Search ==
+user -> bot: Request job openings
+bot -> user: Ask for CV / search criterias
+user -> bot: Send CV / search criterias
+bot -> ai: Send text / CV text with search prompt
+ai -> bot: Return keywords from CV / normalized text
+bot -> experts: Send keywords
+experts -> bot: Return opportunities
+bot -> user: Show opportunities
+user -> hr: Start messaging
+
+== CV Help ==
+user -> bot: Request CV help
+
+
+@enduml
