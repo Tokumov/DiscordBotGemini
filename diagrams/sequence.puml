@@ -2,7 +2,11 @@
 actor User as user
 participant "Discord Bot" as bot
 participant "GPTs/Llama" as ai
+box Experts
 participant "experts.ai" as experts
+participant "recombee" as recomb
+database "unico_store" as db
+end box
 actor HR as hr
 
 == Job Search ==
@@ -18,6 +22,11 @@ user -> hr: Start messaging
 
 == CV Help ==
 user -> bot: Request CV help
+bot -> user: Ask for old CV / skills
+user -> bot: Send requested
+bot -> ai: Send user info with improvement prompt
+ai -> bot: Send improved CV back
+bot -> user: Send improved CV
 
 
 @enduml
