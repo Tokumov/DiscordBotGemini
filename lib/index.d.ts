@@ -39,3 +39,7 @@ declare function getOpportunitiesFromKeywords(text: string): Promise<string[]>;
 declare function initOpenAI(): void;
 
 declare function listenToDiscordBot(): void;
+
+declare function handleButtons(interaction, client): void;
+
+declare function jobSearch(channel, client): void;  //Add types
