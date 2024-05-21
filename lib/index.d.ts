@@ -30,7 +30,10 @@ export interface OrganizationBaseDto {
     active: boolean
 }
 
-declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<Opportunity[]>;
+declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<{ 
+    opportunitiesByKeywords: Opportunity[],
+    opportunitiesByPositions:Opportunity[]
+}>;
 
 declare function getOpportunitiesFromKeywords(keywords: string[], limit: number): Promise<Opportunity[]>;
 
