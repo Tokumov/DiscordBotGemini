@@ -1,4 +1,4 @@
-import { OpenAI } from "openai";
+import { Interaction, Client, Channel } from "discord.js"
 
 export interface Opportunity {
     opportunityId: string
@@ -30,9 +30,13 @@ export interface OrganizationBaseDto {
     active: boolean
 }
 
-declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<{ 
+interface SessionsData {
+    englishUsers: Set<string>;
+}
+
+declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<{
     opportunitiesByKeywords: Opportunity[],
-    opportunitiesByPositions:Opportunity[]
+    opportunitiesByPositions: Opportunity[]
 }>;
 
 declare function getOpportunitiesFromKeywords(keywords: string[], limit: number): Promise<Opportunity[]>;
@@ -43,6 +47,6 @@ declare function initOpenAI(): void;
 
 declare function listenToDiscordBot(): void;
 
-declare function handleButtons(interaction, client): void;
+declare function handleButtons(interaction: Interaction, client: Client, session: SessionsData): Promise<unknown>;
 
-declare function jobSearch(channel, client): void;  //Add types
+declare function jobSearch(channel: Channel, client: Client, session: SessionsData): void;  //Add types
