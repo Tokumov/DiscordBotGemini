@@ -2,40 +2,20 @@
 // Run it once when needed to update commands i.e. adding new command
 // Don't move scripts location in project directory (always run from projects root) 
 
-import { REST, Routes } from "discord.js";
+import { REST, Routes, Collection } from "discord.js";
 import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import * as commandsList from "./lib/commands/utility/index.js";
 
 dotenv.config();
 
-// Define __dirname in ESM environment
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const commands = [];
-const foldersPath = path.join(__dirname, 'lib/commands');
-const commandFolders = fs.readdirSync(foldersPath);
+const clientCommands = new Collection();
 
-for (const folder of commandFolders) {
-    const commandsPath = path.join(foldersPath, folder);
-    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-    for (const file of commandFiles) {
-        const filePath = path.join(commandsPath, file);
-    
-        // Add a new item to collection of commands
-        // Key as a command name
-        // Value as exported modeule
-        try {
-            console.log(filePath);
-            const command = await import(`file://${filePath}`);
-            if ('data' in command && 'execute' in command) {
-                commands.push(command.data.toJSON());
-            } else {
-                console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-            }
-        } catch (error) {
-            console.error(`Error importing command ${file}:`, error);
-        }
+for (const commandName in commandsList) {
+    const command = commandsList[commandName];
+    if ('data' in command && 'execute' in command) {
+        clientCommands.set(command.data.name, command);
+    } else {
+        console.log(`[WARNING] The command at ${commandName} is missing a required "data" or "execute" property.`);
     }
 }
 
@@ -44,11 +24,11 @@ const rest = new REST().setToken(process.env.DISCORD_API_KEY);
 
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(`Started refreshing ${clientCommands.size} application (/) commands.`);
 
 		const data = await rest.put(
 			Routes.applicationCommands(process.env.CLIENT_ID),
-			{ body: commands },
+			{ body: Array.from(clientCommands.values()).map(command => command.data) },
 		);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
