@@ -32,6 +32,7 @@ export interface OrganizationBaseDto {
 
 interface SessionsData {
     englishUsers: Set<string>;
+    page: number;
 }
 
 declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<{
