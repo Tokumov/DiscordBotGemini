@@ -4,7 +4,7 @@
 
 import { REST, Routes, Collection } from "discord.js";
 import dotenv from 'dotenv';
-import * as commandsList from "./lib/commands/utility/index.js";
+import * as commandsList from "./lib/commands/utility/allCommands.js";
 
 dotenv.config();
 

@@ -31,16 +31,19 @@ export interface OrganizationBaseDto {
 }
 
 interface SessionsData {
-    englishUsers: Set<string>;
-    page: number;
+    [userId: string]: {
+        isEnglish: boolean;
+        currentPage: number;
+        hasStarted: boolean;
+    };
 }
 
-declare function getOpportunitiesInfoFromText(text: string, limit: number): Promise<{
+declare function getOpportunitiesInfoFromText(text: string, limit: number, page: number): Promise<{
     opportunitiesByKeywords: Opportunity[],
     opportunitiesByPositions: Opportunity[]
 }>;
 
-declare function getOpportunitiesFromKeywords(keywords: string[], limit: number): Promise<Opportunity[]>;
+declare function getOpportunitiesFromKeywords(keywords: string[], limit: number, page: number): Promise<Opportunity[]>;
 
 declare function getOpportunitiesFromKeywords(text: string): Promise<string[]>;
 

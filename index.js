@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { listenToDiscordBot } from "./lib/index.js";
+import { listenToDiscordBot } from "./lib/main.js";
 
 config();
 

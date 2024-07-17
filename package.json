@@ -20,6 +20,7 @@
     "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7"
+    "@types/node": "^20.12.7",
+    "eslint": "^9.7.0"
   }
 }
