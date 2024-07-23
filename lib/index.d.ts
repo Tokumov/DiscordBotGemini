@@ -30,13 +30,14 @@ export interface OrganizationBaseDto {
     active: boolean
 }
 
-interface SessionsData {
-    [userId: string]: {
-        isEnglish: boolean;
-        currentPage: number;
-        hasStarted: boolean;
-    };
+export interface SessionData {
+    isEnglish: boolean;
+    currentPage: number;
+    hasStarted: boolean;
 }
+
+export let sessionsData: Map<number, SessionData>;
+
 
 declare function getOpportunitiesInfoFromText(text: string, limit: number, page: number): Promise<{
     opportunitiesByKeywords: Opportunity[],
@@ -51,6 +52,6 @@ declare function initOpenAI(): void;
 
 declare function listenToDiscordBot(): void;
 
-declare function handleButtons(interaction: Interaction, client: Client, session: SessionsData): Promise<unknown>;
+declare function handleButtons(interaction: Interaction, client: Client): Promise<unknown>;
 
-declare function jobSearch(channel: Channel, client: Client, session: SessionsData): void;  //Add types
+declare function jobSearch(channel: Channel, client: Client): void;
