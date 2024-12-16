@@ -4,3 +4,4 @@ node_modules
 .eslintrc.json
 
 .idea
+.DS_Store
